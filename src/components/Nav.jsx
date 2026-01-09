@@ -22,10 +22,8 @@ const Nav = () => {
               Find Your Movie
             </Link>
           </li>
-          <li className="nav__link">
-            <Link to="/" className="nav__link--anchor btn__contact">
+          <li className="nav__link nav__link--anchor btn__contact">
               contact
-            </Link>
           </li>
         </ul>
       </nav>

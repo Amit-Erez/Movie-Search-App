@@ -10,13 +10,13 @@ const Home = () => {
 const [query, setQuery] = useState("");
 const navigate = useNavigate();
 
-const handleSubmit = (e) => {
+const handleSubmit = (query) => {
   if (!query.trim()) return;
   navigate(`/findmovie?query=${encodeURIComponent(query)}`);
 };
 
 function onSearchKeyPress(e) {
-if (e.key === "Enter") handleSubmit();
+if (e.key === "Enter") handleSubmit(query);
 }
 
 return  (
@@ -43,13 +43,14 @@ return  (
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={onSearchKeyPress}
+              onKeyUp={onSearchKeyPress}
               placeholder="Search movie or keyword"
             />
             <div className="homesearch--wrapper">
               <FontAwesomeIcon
                 icon="fa-solid fa-magnifying-glass"
                 onClick={() => handleSubmit(query)}
+                style={{ width: "24px", height: "24px", minWidth: "24px", minHeight: "24px", maxWidth: "24px", maxHeight: "24px" }}
               />
             </div>
           </div>

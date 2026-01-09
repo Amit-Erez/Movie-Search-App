@@ -1,6 +1,5 @@
 import React from "react";
 import "./MovieCard.css";
-import movieposter from "../assets/movieposter.jpg";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ title, year, poster, id }) => {

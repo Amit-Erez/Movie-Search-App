@@ -11,7 +11,8 @@ const Results = () => {
 const [showSpinner, setShowSpinner] = useState(false);
 const [loading, setLoading] = useState(false);
 const [movies, setMovies] = useState([]);
-const [searchParams] = useSearchParams();
+const [filter, setFilter] = useState("DEFAULT");
+const [searchParams, setSearchParams] = useSearchParams();
 const query = searchParams.get("query");
 
 async function getMovies(entry) {
@@ -22,7 +23,7 @@ try {
   const { data } = await axios.get(
     `https://www.omdbapi.com/?apikey=46d82378&s=${entry}`
   );
-  const firstSix = data.Search ? data.Search.slice(0, 6) : [];
+  const firstSix = data.Search ? data.Search.slice(0, 8) : [];
   setMovies(firstSix);
   setFilter("DEFAULT");
 } catch (err) {
@@ -35,9 +36,16 @@ try {
 }
 }
 
+function runSearch(entry) {
+  const q = entry.trim();
+  if (!q) return;
+  setSearchParams({ query: q });
+}
+
 
 useEffect(() => {
   if (query) {
+    setEntry(query);
     setShowSpinner(true);
     getMovies(query).finally(() => {
     setTimeout(() => setShowSpinner(false), 500); 
@@ -48,10 +56,9 @@ useEffect(() => {
 const [entry, setEntry] = useState("");
 
 function onSearchKeyPress(key) {
-  key === "Enter" && getMovies(entry);
+  key === "Enter" && runSearch(entry);
 }
 
-const [filter, setFilter] = useState("DEFAULT");
 
 function filterMovies(filter) {
   console.log(movies);
@@ -68,9 +75,15 @@ function filterMovies(filter) {
 }
 
 function showResults() {
+  if (!query) {
+    return
+  }
   return (
     <>
-      {movies.map((movie) => (
+      {
+      movies.length === 0 ? 
+        <h1 className="no__results">No results found...</h1> : 
+      movies.map((movie) => (
         <MovieCard
           title={movie.Title}
           year={movie.Year}
@@ -103,13 +116,14 @@ return showSpinner ? (
             type="text"
             value={entry}
             onChange={(e) => setEntry(e.target.value)}
-            onKeyDown={(e) => onSearchKeyPress(e.key)}
-            placeholder="Search by movie or keyword"
+            onKeyUp={(e) => onSearchKeyPress(e.key)}
+            placeholder="Search movie"
           />
           <div className="search-wrapper">
             <FontAwesomeIcon
               icon="fa-solid fa-magnifying-glass"
-              onClick={() => getMovies(entry)}
+              onClick={() => runSearch(entry)}
+              style={{ width: "24px", height: "24px", minWidth: "24px", minHeight: "24px", maxWidth: "24px", maxHeight: "24px" }}
             />
           </div>
         </div>
@@ -177,5 +191,3 @@ return showSpinner ? (
 
 export default Results;
 
-{
-}

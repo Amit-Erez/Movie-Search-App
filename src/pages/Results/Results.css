@@ -156,6 +156,14 @@ RESULTS SECTION
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+}
+
+.no__results {
+  position: absolute;
+  width: 300px;
+  display: flex;
+  justify-content: center;
 }
 
 .movie {

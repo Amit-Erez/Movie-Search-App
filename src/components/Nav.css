@@ -54,7 +54,7 @@ color: #fff;
 
 .btn__contact {
 display: flex;
-cursor: pointer;
+cursor: not-allowed;
 max-height: 48px;
 min-height: 48px;
 padding: 12px 40px;
