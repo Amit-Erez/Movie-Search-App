@@ -8,7 +8,7 @@ const Nav = () => {
       <nav className="navbar">
           <Link to={"/"}>
         <figure className="amit__logo--wrapper">
-            <img className="amit__logo" src={Logo} alt="" />
+            <img className="amit__logo" src={Logo} alt="logo image" width="3" height="2"/>
         </figure>
           </Link>
         <ul className="nav__link--list">

@@ -10,12 +10,11 @@ body {
 }
 
 .homebg__img {
-  /* width: 100%;     */
   max-width: 1920px;
+  height: auto;
   opacity: 0.5;
   z-index: 0;
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-  /* -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); */
 }
 
 .home__title {
@@ -73,6 +72,7 @@ body {
 
 .marquee__img {
   width: 100%;
+  height: auto;
   padding: 0;
   animation: pulse-brightness 2s infinite ease-in-out;
 }
